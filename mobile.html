@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>ЗЭТА — Жилой квартал · Кемерово</title>
+<link rel="icon" type="image/png" href="assets/zeta-icon-cropped.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#C9A84C;--gold2:#ECC350;
+  --gold-mute:rgba(201,168,76,0.7);
+  --ink:#0A0908;--beige:#F2EDE4;--beige2:#EDE8DF;
+  --warm-white:#F5F0E8;--text-mute:rgba(10,9,8,0.55);
+  --serif:'Cormorant Garamond',serif;--sans:'Inter',sans-serif;
+}
+html,body{background:var(--beige2);color:var(--ink);font-family:var(--sans);}
+
+/* PHOTO BLOCK — full width, no stretch */
+.photo{width:100%;display:block;object-fit:cover;}
+.photo-tall{width:100%;height:70vw;object-fit:cover;object-position:center;}
+.photo-wide{width:100%;height:56vw;object-fit:cover;object-position:center;}
+.photo-sq{width:100%;height:100vw;object-fit:cover;object-position:center;}
+
+/* HERO — full screen with bg */
+.hero{position:relative;min-height:100svh;min-height:100vh;
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+  background-color:#0a0908;}
+.hero-ov-top{position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.72) 0%,transparent 40%);pointer-events:none;}
+.hero-ov-bot{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.4) 35%,transparent 65%);pointer-events:none;}
+.hero-ov-dark{position:absolute;inset:0;background:rgba(5,4,3,0.45);pointer-events:none;}
+
+/* TEXT SECTIONS */
+.tx{background:var(--beige);padding:28px 20px 36px;}
+.tx-dark{background:var(--ink);padding:28px 20px 36px;}
+.tx-sm{padding:22px 20px 28px;}
+
+/* TYPOGRAPHY */
+.lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold-mute);display:block;margin-bottom:10px;}
+.lbl-dk{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:rgba(201,168,76,0.6);display:block;margin-bottom:10px;}
+.h1{font-family:var(--serif);font-size:clamp(38px,11vw,54px);font-weight:300;color:var(--warm-white);line-height:1.0;}
+.h2{font-family:var(--serif);font-size:clamp(28px,8vw,40px);font-weight:300;color:var(--ink);line-height:1.05;}
+.h2-dk{font-family:var(--serif);font-size:clamp(28px,8vw,40px);font-weight:300;color:var(--warm-white);line-height:1.05;}
+.h2-ov{font-family:var(--serif);font-size:clamp(28px,8vw,40px);font-weight:300;color:var(--warm-white);line-height:1.05;}
+em.g{color:var(--gold);font-style:italic;}
+.body{font-size:13px;line-height:1.75;color:var(--text-mute);font-weight:300;margin-top:10px;}
+.body-dk{font-size:13px;line-height:1.75;color:rgba(212,200,176,0.8);font-weight:300;margin-top:10px;}
+.rule{width:40px;height:1px;background:rgba(201,168,76,0.4);margin:14px 0;}
+.rule-dk{width:40px;height:1px;background:rgba(201,168,76,0.3);margin:14px 0;}
+
+/* PHOTO + OVERLAY TEXT (for detail shots where text must be on image) */
+.photo-wrap{position:relative;overflow:hidden;}
+.photo-wrap img{width:100%;display:block;}
+.photo-wrap .ov-bot{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.5) 30%,transparent 60%);}
+.photo-wrap .cap{position:absolute;bottom:0;left:0;right:0;padding:16px 20px 24px;}
+
+/* STATS */
+.sgrid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(201,168,76,0.2);margin-top:18px;}
+.scell{padding:14px 0;border-bottom:1px solid rgba(201,168,76,0.12);}
+.scell:nth-child(odd){border-right:1px solid rgba(201,168,76,0.12);padding-right:12px;}
+.scell:nth-child(even){padding-left:12px;}
+.scell.full{grid-column:1/-1;border-right:none!important;padding-left:0;}
+.snum{font-family:var(--serif);font-size:clamp(36px,10vw,50px);font-weight:300;color:var(--gold);line-height:1;}
+.slbl{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(10,9,8,0.4);margin-top:4px;}
+.snum-dk{font-family:var(--serif);font-size:clamp(36px,10vw,50px);font-weight:300;color:var(--gold);line-height:1;}
+.slbl-dk{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,0.5);margin-top:4px;}
+
+/* ACRO */
+.arow{display:flex;align-items:baseline;gap:12px;padding:11px 0;border-bottom:1px solid rgba(10,9,8,0.07);}
+.arow:last-child{border-bottom:none;}
+.aletter{font-family:var(--serif);font-size:40px;font-weight:300;color:var(--gold);line-height:1;min-width:38px;}
+.aword{font-family:var(--serif);font-size:18px;font-style:italic;color:rgba(10,9,8,0.7);}
+
+/* LOCATION LIST */
+.loclist{list-style:none;margin-top:14px;}
+.loclist li{padding:9px 0;border-bottom:1px solid rgba(10,9,8,0.07);font-size:12px;color:var(--text-mute);}
+.loclist li:last-child{border-bottom:none;}
+
+/* FEAT GRID */
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;}
+.fi{padding:14px 12px;border:1px solid rgba(201,168,76,0.18);}
+.fin{font-family:var(--serif);font-size:22px;color:var(--gold);margin-bottom:3px;}
+.fit{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,0.8);margin-bottom:3px;}
+.fid{font-size:11px;color:rgba(212,200,176,0.75);line-height:1.5;}
+
+/* FORMATS */
+.fmtlist{margin-top:14px;}
+.fmtrow{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid rgba(10,9,8,0.07);}
+.fmtrow:last-child{border-bottom:none;}
+.fname{font-family:var(--serif);font-size:22px;font-weight:300;color:var(--gold);}
+.farea{font-size:11px;color:var(--text-mute);text-align:right;line-height:1.5;}
+.flab{font-size:8px;letter-spacing:3px;color:rgba(10,9,8,0.3);}
+
+/* PLAN */
+.plan{background:var(--beige);}
+.plan-hd{padding:24px 20px 0;}
+.plan-badge{display:inline-block;font-size:8px;letter-spacing:4px;text-transform:uppercase;border:1px solid var(--gold);padding:3px 8px;color:var(--gold);margin-bottom:8px;}
+.plan-title{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--ink);}
+.plan-type{font-size:11px;color:var(--text-mute);margin:3px 0 0;letter-spacing:0.5px;}
+.plan-img-box{width:100%;background:var(--beige);padding:12px 0;}
+.plan-img-box img{display:block;width:100%;height:auto;mix-blend-mode:multiply;}
+.plan-ft{padding:4px 20px 32px;}
+.plan ul{list-style:none;margin-top:12px;}
+.plan ul li{padding:7px 0;border-bottom:1px solid rgba(10,9,8,0.07);font-size:12px;color:rgba(10,9,8,0.65);padding-left:16px;position:relative;line-height:1.5;}
+.plan ul li::before{content:"—";position:absolute;left:0;color:var(--gold);}
+.pprice{margin-top:16px;font-family:var(--serif);font-size:15px;font-style:italic;color:var(--text-mute);}
+
+/* PHASE */
+.phgrid{display:grid;gap:10px;margin-top:16px;}
+.phitem{padding:14px;border:1px solid rgba(201,168,76,0.2);}
+.phnum{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-mute);}
+.phname{font-family:var(--serif);font-size:18px;font-weight:300;color:var(--warm-white);margin:3px 0;}
+.phdet{font-size:11px;color:rgba(212,200,176,0.7);line-height:1.6;}
+
+/* ADV */
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;}
+.aitem{padding:14px 12px;border:1px solid rgba(10,9,8,0.1);}
+.atit{font-family:var(--serif);font-size:18px;color:var(--gold);margin-bottom:5px;}
+.adsc{font-size:11px;color:rgba(10,9,8,0.6);line-height:1.5;}
+
+/* CONTACTS */
+.cblock{margin-bottom:22px;}
+.ctype{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(10,9,8,0.38);margin-bottom:6px;}
+.cval{font-family:var(--serif);font-size:22px;font-weight:300;color:var(--ink);}
+.cval a{color:var(--ink);text-decoration:none;display:block;}
+.csub{font-size:11px;color:var(--text-mute);margin-top:2px;}
+
+/* DETAIL TAG */
+.dtag{position:absolute;top:18px;left:18px;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:#ECC350;background:rgba(3,2,1,0.5);padding:5px 10px;border-radius:2px;}
+
+/* SEPARATOR */
+.sep{height:1px;background:rgba(10,9,8,0.08);margin:0;}
+
+/* HERO ABS TEXT */
+.hero-head{position:absolute;top:0;left:0;right:0;z-index:2;padding:26px 20px 0;}
+.hero-foot{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:0 20px 40px;}
+.hero-ctr{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 20px 70px;text-align:center;}
+</style>
+</head>
+<body>
+
+<!-- ══ 1. ОБЛОЖКА ══ -->
+<div class="hero" style="background-image:url('assets/cover_1600.jpeg');background-position:center 25%;">
+  <div class="hero-ov-top"></div>
+  <div class="hero-ov-bot"></div>
+  <div class="hero-head">
+    <div style="display:flex;align-items:flex-start;gap:10px;">
+      <img src="assets/zeta-icon-cropped.png" style="height:48px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.5));">
+      <div style="font-family:var(--serif);font-size:clamp(46px,13vw,64px);font-weight:300;color:var(--gold2);letter-spacing:0.28em;line-height:1;text-shadow:0 2px 8px rgba(0,0,0,0.5);margin-top:2px;">ЗЭТА</div>
+    </div>
+    <div style="font-size:9px;letter-spacing:7px;text-transform:uppercase;color:var(--gold2);margin-top:6px;margin-left:58px;opacity:0.85;">Жилой квартал · Кемерово</div>
+  </div>
+  <div class="hero-foot">
+    <div style="width:36px;height:1px;background:rgba(201,168,76,0.5);margin-bottom:14px;"></div>
+    <div style="font-family:var(--serif);font-size:17px;font-style:italic;color:rgba(232,201,106,0.9);text-shadow:0 1px 16px rgba(0,0,0,1);line-height:1.5;">Архитектура как наследие. Новая высота комфорта</div>
+    <div style="font-size:8px;letter-spacing:5px;text-transform:uppercase;color:rgba(201,168,76,0.6);margin-top:12px;">kgstroy.ru</div>
+  </div>
+</div>
+
+<!-- ══ 2. БИЗНЕС-КЛАСС ══ -->
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/c93a88c12498.jpeg" alt="" loading="lazy" style="object-position:center 30%;">
+  <div class="ov-bot"></div>
+  <div class="cap">
+    <span class="lbl-dk">Стандарт нового уровня</span>
+    <div class="h1">Там, где класс<br><em class="g">определяет всё</em></div>
+  </div>
+</div>
+<div class="tx">
+  <p class="body">Безупречное воплощение всех атрибутов истинного бизнес-класса, впервые реализованного в Кемерово. Место для тех, кто привык к лучшему.</p>
+</div>
+
+<!-- ══ 3. ЗЭТА / АКРОНИМ ══ -->
+<div class="tx" style="background:var(--beige2);">
+  <span class="lbl">Имя с характером</span>
+  <div class="h2" style="margin-bottom:20px;">Каждая буква — <em class="g">смысл</em></div>
+  <div class="arow"><span class="aletter">З</span><span class="aword">начимость</span></div>
+  <div class="arow"><span class="aletter">Э</span><span class="aword">стетика</span></div>
+  <div class="arow"><span class="aletter">Т</span><span class="aword">радиции</span></div>
+  <div class="arow"><span class="aletter">А</span><span class="aword">рхитектура</span></div>
+  <div class="rule" style="margin-top:20px;"></div>
+  <p style="font-family:var(--serif);font-size:16px;font-style:italic;color:var(--gold-mute);">Сообщество первых.<br>Клубное пространство единомышленников</p>
+</div>
+
+<!-- ══ 4. ПРЕЕМСТВЕННОСТЬ В ДЕТАЛЯХ ТИТУЛ ══ -->
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/ce285e44096a.jpg" alt="" loading="lazy" style="object-position:center 40%;">
+  <div class="ov-bot"></div>
+  <div class="cap" style="text-align:center;">
+    <span class="lbl-dk">Архитектура · Наследие</span>
+    <div class="h1">Преемственность<br><em class="g">в деталях</em></div>
+  </div>
+</div>
+
+<!-- ══ 4а–4з ДЕТАЛИ ФАСАДА (полный экран — детальные снимки) ══ -->
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/7749b215f3b6.jpg" alt="" loading="lazy" style="object-position:center 10%;">
+  <div class="ov-bot"></div>
+  <div class="cap"><div class="dtag" style="position:relative;top:auto;left:auto;display:inline-block;margin-bottom:8px;">01 / 08</div><div class="h1" style="font-size:clamp(24px,7vw,36px);">Венчающий карниз</div><div style="font-family:var(--serif);font-size:15px;font-style:italic;color:rgba(232,201,106,0.8);margin-top:4px;">Золотые орнаменты</div></div>
+</div>
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/891b99e33c12.jpg" alt="" loading="lazy" style="object-position:30% 20%;">
+  <div class="ov-bot"></div>
+  <div class="cap"><div class="dtag" style="position:relative;top:auto;left:auto;display:inline-block;margin-bottom:8px;">02 / 08</div><div class="h1" style="font-size:clamp(24px,7vw,36px);">Угловой ризалит</div><div style="font-family:var(--serif);font-size:15px;font-style:italic;color:rgba(232,201,106,0.8);margin-top:4px;">Золотое орнаментирование</div></div>
+</div>
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/f04cc419ce0a.jpg" alt="" loading="lazy" style="object-position:center 35%;">
+  <div class="ov-bot"></div>
+  <div class="cap"><div class="dtag" style="position:relative;top:auto;left:auto;display:inline-block;margin-bottom:8px;">03 / 08</div><div class="h1" style="font-size:clamp(24px,7vw,36px);">Орнаментальные пилястры</div><div style="font-family:var(--serif);font-size:15px;font-style:italic;color:rgba(232,201,106,0.8);margin-top:4px;">Классический декор фасада</div></div>
+</div>
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/dcff859788d6.jpg" alt="" loading="lazy" style="object-position:center 65%;">
+  <div class="ov-bot"></div>
+  <div class="cap"><div class="dtag" style="position:relative;top:auto;left:auto;display:inline-block;margin-bottom:8px;">04 / 08</div><div class="h1" style="font-size:clamp(24px,7vw,36px);">Цокольный ярус</div><div style="font-family:var(--serif);font-size:15px;font-style:italic;color:rgba(232,201,106,0.8);margin-top:4px;">Аркады</div></div>
+</div>
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/9464554997b1.jpg" alt="" loading="lazy" style="object-position:center 25%;">
+  <div class="ov-bot"></div>
+  <div class="cap"><div class="dtag" style="position:relative;top:auto;left:auto;display:inline-block;margin-bottom:8px;">05 / 08</div><div class="h1" style="font-size:clamp(24px,7vw,36px);">Балконные ограждения</div><div style="font-family:var(--serif);font-size:15px;font-style:italic;color:rgba(232,201,106,0.8);margin-top:4px;">Пластика фасада</div></div>
+</div>
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/9d307281b0a3.jpg" alt="" loading="lazy" style="object-position:center 15%;">
+  <div class="ov-bot"></div>
+  <div class="cap"><div class="dtag" style="position:relative;top:auto;left:auto;display:inline-block;margin-bottom:8px;">06 / 08</div><div class="h1" style="font-size:clamp(24px,7vw,36px);">Пилоны</div><div style="font-family:var(--serif);font-size:15px;font-style:italic;color:rgba(232,201,106,0.8);margin-top:4px;">Цилиндрические колонны</div></div>
+</div>
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/c90395e78e3d.jpg" alt="" loading="lazy" style="object-position:center 40%;">
+  <div class="ov-bot"></div>
+  <div class="cap"><div class="dtag" style="position:relative;top:auto;left:auto;display:inline-block;margin-bottom:8px;">07 / 08</div><div class="h1" style="font-size:clamp(24px,7vw,36px);">Изразцовые панно</div><div style="font-family:var(--serif);font-size:15px;font-style:italic;color:rgba(232,201,106,0.8);margin-top:4px;">Керамический декор</div></div>
+</div>
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/fd4eef047e07.jpg" alt="" loading="lazy" style="object-position:center 20%;">
+  <div class="ov-bot"></div>
+  <div class="cap"><div class="dtag" style="position:relative;top:auto;left:auto;display:inline-block;margin-bottom:8px;">08 / 08</div><div class="h1" style="font-size:clamp(24px,7vw,36px);">Ритм фасада</div><div style="font-family:var(--serif);font-size:15px;font-style:italic;color:rgba(232,201,106,0.8);margin-top:4px;">Пилястры · Оконные проёмы</div></div>
+</div>
+
+<!-- ══ 5. МАСШТАБ ══ -->
+<div class="photo-wrap">
+  <img class="photo-wide" src="assets/m/4e7ebf018805.jpg" alt="" loading="lazy">
+</div>
+<div class="tx">
+  <span class="lbl">Масштаб</span>
+  <div class="h2" style="margin-bottom:0;">Масштаб<br><em class="g">вашей жизни</em></div>
+  <div class="sgrid">
+    <div class="scell"><div class="snum">112</div><div class="slbl">квартир</div></div>
+    <div class="scell"><div class="snum">5–7</div><div class="slbl">этажей</div></div>
+    <div class="scell"><div class="snum">29</div><div class="slbl">террас</div></div>
+    <div class="scell"><div class="snum" style="font-size:clamp(24px,7vw,36px);">от 2,7 м</div><div class="slbl">высота потолков</div></div>
+    <div class="scell full"><div class="snum">163</div><div class="slbl">машино-места</div></div>
+  </div>
+</div>
+
+<!-- ══ 6. ЛОКАЦИЯ ══ -->
+<div class="tx" style="background:var(--beige2);">
+  <span class="lbl">Расположение</span>
+  <div style="font-family:var(--serif);font-size:clamp(52px,15vw,80px);font-weight:300;color:var(--gold);line-height:1;">10</div>
+  <div style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold-mute);">минут пешком</div>
+  <div style="font-family:var(--serif);font-size:16px;font-style:italic;color:var(--text-mute);margin:4px 0 12px;">до всего важного</div>
+  <ul class="loclist">
+    <li>Площадь Советов</li>
+    <li>Театр Драмы им. Луначарского</li>
+    <li>КузГТУ</li>
+    <li>Парк Ангелов и набережная Томи</li>
+    <li>ТЦ «Променад»</li>
+    <li>Гимназия №1 · Лицей №62</li>
+    <li>ЦУМ · Рестораны · Кафе</li>
+  </ul>
+</div>
+<img src="assets/47c404366b50.jpg" alt="Карта" loading="lazy" style="width:100%;display:block;">
+
+<!-- ══ 7. ДВОР-ПАРК ══ -->
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/8678aa54ea6e.jpeg" alt="" loading="lazy">
+  <div class="ov-bot"></div>
+  <div class="cap">
+    <span class="lbl-dk">Благоустройство</span>
+    <div class="h1">Место, где утро<br><em class="g">начинается иначе</em></div>
+  </div>
+</div>
+<div class="tx">
+  <p class="body">Закрытый двор с ландшафтным дизайном — только для резидентов ЗЭТА. Здесь не слышно города. Здесь дети играют во дворе, а вы пьёте кофе под живыми деревьями.</p>
+</div>
+
+<!-- ══ 8. ХОЛЛ ══ -->
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/4a127b315451.jpg" alt="" loading="lazy">
+  <div class="ov-bot"></div>
+  <div class="cap">
+    <span class="lbl-dk">Общественные пространства</span>
+    <div class="h1">Войти в дом —<br><em class="g">и почувствовать</em></div>
+  </div>
+</div>
+<div class="tx">
+  <p class="body">Авторские холлы с натуральным камнем, бронзовые акценты, живой свет. Лобби ЗЭТА — продолжение вашего дома. Холл, достойный пятизвёздочного отеля.</p>
+</div>
+
+<!-- ══ 9. ПАРКИНГ ══ -->
+<div class="photo-wrap">
+  <img class="photo-wide" src="assets/m/c1b24b425e0a.png" alt="" loading="lazy">
+  <div class="ov-bot"></div>
+  <div class="cap">
+    <span class="lbl-dk">Инфраструктура</span>
+    <div class="h1">Паркинг<br><em class="g">163 машино-места</em></div>
+  </div>
+</div>
+<div class="tx-dark">
+  <div class="fg">
+    <div class="fi"><div class="fin">163</div><div class="fit">Машино-мест</div><div class="fid">Подземный паркинг</div></div>
+    <div class="fi"><div class="fin">24/7</div><div class="fit">Видеонаблюдение</div><div class="fid">Безопасность круглосуточно</div></div>
+    <div class="fi"><div class="fin">B1</div><div class="fit">Лифт в холл</div><div class="fid">Тёплый переход в дом</div></div>
+    <div class="fi"><div class="fin">∞</div><div class="fit">Кладовые</div><div class="fid">Индивидуальные помещения</div></div>
+  </div>
+</div>
+
+<!-- ══ 10. ТИШИНА И БЕЗОПАСНОСТЬ ══ -->
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/21450310a1b3.jpeg" alt="" loading="lazy" style="object-position:center 40%;">
+  <div class="ov-bot"></div>
+  <div class="cap">
+    <span class="lbl-dk">Безопасность и покой</span>
+    <div class="h1">Тишина<br><em class="g">и безопасность</em></div>
+  </div>
+</div>
+<div class="tx-dark">
+  <div class="fg">
+    <div class="fi"><div class="fin">24/7</div><div class="fit">Видеонаблюдение</div><div class="fid">Мониторинг всей территории</div></div>
+    <div class="fi"><div class="fin">◊</div><div class="fit">Консьерж</div><div class="fid">Персональный для резидентов</div></div>
+    <div class="fi"><div class="fin">∞</div><div class="fit">Бесключевой доступ</div><div class="fid">Контроль через смартфон</div></div>
+    <div class="fi"><div class="fin">◉</div><div class="fit">Закрытая территория</div><div class="fid">Полностью огороженный двор</div></div>
+  </div>
+</div>
+
+<!-- ══ 11. КОММЕРЦИЯ ══ -->
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/855fb9f262e1.jpeg" alt="" loading="lazy">
+  <div class="ov-bot"></div>
+  <div class="cap">
+    <span class="lbl-dk">Инфраструктура квартала</span>
+    <div class="h1">Все для жизни<br><em class="g">внутри квартала</em></div>
+  </div>
+</div>
+<div class="tx">
+  <div style="padding:16px;border:1px solid rgba(201,168,76,0.2);margin-bottom:10px;">
+    <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-mute);margin-bottom:5px;">Первый этаж</div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--ink);">Коммерческая галерея</div>
+    <p class="body">Магазины, кафе и сервисы премиум-уровня — не выходя из квартала.</p>
+  </div>
+  <div style="padding:16px;border:1px solid rgba(201,168,76,0.2);">
+    <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-mute);margin-bottom:5px;">Нулевой этаж</div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--ink);">Кладовые и паркинг</div>
+    <p class="body">Тёплая подземная парковка с прямым лифтом в холл.</p>
+  </div>
+</div>
+
+<!-- ══ 11а ТЕРРАСА ══ -->
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/071c27379999.jpeg" alt="" loading="lazy">
+  <div class="ov-bot"></div>
+  <div class="cap">
+    <div class="h1" style="font-size:clamp(22px,6.5vw,34px);">Ваш новый уровень комфорта —<br>личный выход на <em class="g">уединённую террасу</em></div>
+  </div>
+</div>
+
+<!-- ══ 11б ДВОР УЮТ ══ -->
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/437d71e4c1eb.jpeg" alt="" loading="lazy">
+  <div class="ov-bot"></div>
+  <div class="cap">
+    <div class="h1" style="font-size:clamp(22px,6.5vw,34px);">Каждый день начинается<br>с ощущения <em class="g">особого уюта</em></div>
+  </div>
+</div>
+
+<!-- ══ 11в ВСЕСЕЗОННЫЙ ДВОР ══ -->
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/e1ae6b832518.jpg" alt="" loading="lazy">
+  <div class="ov-bot"></div>
+  <div class="cap">
+    <span class="lbl-dk">Двор</span>
+    <div class="h1">Всесезонный<br><em class="g">двор-парк</em></div>
+  </div>
+</div>
+
+<!-- ══ 11г САУНЫ ══ -->
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/7d1dc4120e84.jpg" alt="" loading="lazy">
+  <div class="ov-bot"></div>
+  <div class="cap">
+    <div class="h1">Планировки с<br><em class="g">саунами</em></div>
+  </div>
+</div>
+
+<!-- ══ 12. ФИЛОСОФИЯ ══ -->
+<div class="hero" style="background-image:url('assets/m/7989b0c8fac5.jpeg');background-position:center;">
+  <div class="hero-ov-dark"></div>
+  <div class="hero-ctr">
+    <span class="lbl-dk">Философия проекта</span>
+    <div style="font-family:var(--serif);font-size:clamp(28px,8vw,42px);font-weight:300;color:var(--gold);line-height:1.1;margin:10px 0;">Здесь проектировали жизнь,<br>а не квадратные метры</div>
+    <div class="rule-dk" style="margin:14px auto;"></div>
+    <p style="font-size:13px;line-height:1.7;color:rgba(212,200,176,0.8);max-width:280px;">ЗЭТА — особенная среда. Архитектура, которая вдохновляет. Двор, который успокаивает.</p>
+  </div>
+</div>
+
+<!-- ══ 13. СЕМЕЙНЫЕ РЕЗИДЕНЦИИ ══ -->
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/m/6086bbda31a0.png" alt="" loading="lazy" style="object-position:center 25%;">
+  <div class="ov-bot"></div>
+  <div class="cap">
+    <span class="lbl-dk">Жилые пространства</span>
+    <div class="h1">Семейные<br><em class="g">резиденции</em></div>
+  </div>
+</div>
+<div class="tx">
+  <p class="body">Просторные квартиры с продуманными планировками. 2,7–3,5 м потолки · 29 террас · 112 квартир.</p>
+</div>
+
+<!-- ══ 14. МАСТЕР-СПАЛЬНЯ ══ -->
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/848cb1d00f2c.jpeg" alt="" loading="lazy">
+  <div class="ov-bot"></div>
+  <div class="cap">
+    <span class="lbl-dk">Приватная зона</span>
+    <div class="h1">Мастер-<em class="g">спальня</em></div>
+  </div>
+</div>
+<div class="tx">
+  <p class="body">Изолированная мастер-спальня с гардеробной и собственной ванной комнатой. Выход на собственную террасу.</p>
+</div>
+
+<!-- ══ 15. ОБЪЁМНЫЕ ПРОСТРАНСТВА ══ -->
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/a4699fb42e16.jpeg" alt="" loading="lazy">
+  <div class="ov-bot"></div>
+  <div class="cap">
+    <span class="lbl-dk">Архитектура пространства</span>
+    <div class="h1">Объёмные<br><em class="g">пространства</em></div>
+  </div>
+</div>
+<div class="tx">
+  <p class="body">Открытые планировки с высокими потолками и плавными переходами. Двойной свет в гостиных. Панорамное остекление. Свободные планировки.</p>
+</div>
+
+<!-- ══ 16. ПАНОРАМЫ ══ -->
+<div class="photo-wrap">
+  <img class="photo-sq" src="assets/2c4fbbad98b5.jpeg" alt="" loading="lazy" style="object-position:center 40%;">
+  <div class="ov-bot"></div>
+  <div class="cap">
+    <span class="lbl-dk">Видовые характеристики</span>
+    <div class="h1">Живописные<br><em class="g">панорамы</em></div>
+  </div>
+</div>
+<div class="tx">
+  <p class="body">Открытые террасы с захватывающими видами на Кемерово. Каждое утро начинается с неповторимой картины просыпающегося города.</p>
+</div>
+
+<!-- ══ 17. ФОРМАТЫ ══ -->
+<div class="tx" style="background:var(--beige2);">
+  <span class="lbl">Квартирография</span>
+  <div class="h2" style="margin-bottom:8px;">Форматы<br><em class="g">для жизни</em></div>
+  <p class="body" style="margin-bottom:0;">Пять способов жить в ЗЭТА — для каждого своя история.</p>
+  <div class="fmtlist">
+    <div class="fmtrow"><div><div class="flab">Формат 01</div><div class="fname">SMART</div></div><div class="farea">Студия<br>34,86 м²</div></div>
+    <div class="fmtrow"><div><div class="flab">Формат 02</div><div class="fname">COMFORT</div></div><div class="farea">1-комн. Евро<br>49,81 м²</div></div>
+    <div class="fmtrow"><div><div class="flab">Формат 03</div><div class="fname">FAMILY</div></div><div class="farea">2 спальни<br>105,14 м²</div></div>
+    <div class="fmtrow"><div><div class="flab">Формат 04</div><div class="fname">LUXURY</div></div><div class="farea">4-комн. Премиум<br>114,19 м²</div></div>
+    <div class="fmtrow" style="border:none;"><div><div class="flab">Формат 05</div><div class="fname">PENTHOUSE</div></div><div class="farea">4 спальни + терраса<br>150,07 м²</div></div>
+  </div>
+</div>
+
+<!-- ══ 18–22. ПЛАНИРОВКИ ══ -->
+<div class="plan">
+  <div class="plan-hd"><div class="plan-badge">Format 01</div><div class="plan-title">SMART</div><div class="plan-type">Студия · 34,86 м²</div></div>
+  <div class="plan-img-box"><img src="assets/6aae95965d6f.png" alt="Smart" loading="lazy" style="display:block;width:72%;height:auto;mix-blend-mode:multiply;margin:0 auto;"></div>
+  <div class="plan-ft"><ul><li>Просторная кухня-гостиная</li><li>Возможность организации приватной спальной зоны</li><li>Панорамное остекление · Много естественного света</li><li>Высокий инвест-потенциал · Ликвидный формат для аренды</li><li>Эргономика · Максимальный комфорт и удобство</li></ul><div class="pprice">Стоимость по запросу</div></div>
+</div>
+<div class="sep"></div>
+<div class="plan">
+  <div class="plan-hd"><div class="plan-badge">Format 02</div><div class="plan-title">COMFORT</div><div class="plan-type">1-комнатная ЕВРО · 49,81 м²</div></div>
+  <div class="plan-img-box"><img src="assets/1ac18d9ce0df.svg" alt="Comfort" loading="lazy" style="mix-blend-mode:multiply;"></div>
+  <div class="plan-ft"><ul><li>Кухня-гостиная Living &amp; Dining · Простор для приема гостей</li><li>Спальня изолированная · Приватная зона</li><li>Просторная и удобная прихожая</li><li>Собственная терраса</li><li>Панорамное остекление · Много света и воздуха</li></ul><div class="pprice">Стоимость по запросу</div></div>
+</div>
+<div class="sep"></div>
+<div class="plan">
+  <div class="plan-hd"><div class="plan-badge">Format 03</div><div class="plan-title">FAMILY</div><div class="plan-type">Студия с 2 спальнями · 105,14 м²</div></div>
+  <div class="plan-img-box"><img src="assets/e4a7ee0cf622.svg" alt="Family" loading="lazy" style="mix-blend-mode:multiply;"></div>
+  <div class="plan-ft"><ul><li>Изолированные спальни с окнами во двор</li><li>Кухня-гостиная с террасой · Место под остров / барную стойку</li><li>Гостевой санузел · Сауна</li><li>Мастер-спальня · Собственная гардеробная, ванна и терраса</li><li>Просторная и удобная прихожая</li></ul><div class="pprice">Стоимость по запросу</div></div>
+</div>
+<div class="sep"></div>
+<div class="plan">
+  <div class="plan-hd"><div class="plan-badge">Format 04</div><div class="plan-title">LUXURY</div><div class="plan-type">4-комнатная Премиум · 114,19 м²</div></div>
+  <div class="plan-img-box"><img src="assets/ffa7f8f59086.svg" alt="Luxury" loading="lazy" style="mix-blend-mode:multiply;"></div>
+  <div class="plan-ft"><ul><li>Мастер-спальня с террасой · Гардеробная, ванная с сауной</li><li>Гостиная 47 м² с террасой</li><li>Гостевой санузел</li><li>Панорамные виды · Угловое остекление</li><li>Простор и приватность для каждого</li></ul><div class="pprice">Стоимость по запросу</div></div>
+</div>
+<div class="sep"></div>
+<div class="plan">
+  <div class="plan-hd"><div class="plan-badge">Format 05</div><div class="plan-title">PENTHOUSE</div><div class="plan-type">4 спальни + терраса · 150,07 м²</div></div>
+  <div class="plan-img-box"><img src="assets/195e39ed238c.png" alt="Penthouse" loading="lazy" style="mix-blend-mode:multiply;"></div>
+  <div class="plan-ft"><ul><li>3 просторных санузла · Сауна · Постирочная</li><li>Собственная терраса ~43 м² приватного пространства</li><li>Мастер-спальня · Гардеробная и ванная комната</li><li>Панорамное остекление</li></ul><div class="pprice">Стоимость по запросу</div></div>
+</div>
+
+<!-- ══ 23. ПЛАН СТРОИТЕЛЬСТВА ══ -->
+<div style="position:relative;overflow:hidden;">
+  <img src="assets/501d3b7accf0.jpg" alt="" loading="lazy" style="width:100%;display:block;height:80vw;object-fit:cover;object-position:center 40%;">
+  <!-- Бейджи корпусов — позиции по реальным зданиям на рендере -->
+  <div style="position:absolute;left:20%;top:77%;transform:translate(-50%,-50%);background:rgba(201,168,76,0.93);color:#0a0908;font-size:10px;font-weight:600;letter-spacing:2px;padding:5px 10px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.4);">К · 1</div>
+  <div style="position:absolute;left:46%;top:62%;transform:translate(-50%,-50%);background:rgba(201,168,76,0.93);color:#0a0908;font-size:10px;font-weight:600;letter-spacing:2px;padding:5px 10px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.4);">К · 2</div>
+  <div style="position:absolute;left:64%;top:54%;transform:translate(-50%,-50%);background:rgba(201,168,76,0.93);color:#0a0908;font-size:10px;font-weight:600;letter-spacing:2px;padding:5px 10px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.4);">К · 3</div>
+  <div style="position:absolute;left:69%;top:76%;transform:translate(-50%,-50%);background:rgba(201,168,76,0.93);color:#0a0908;font-size:10px;font-weight:600;letter-spacing:2px;padding:5px 10px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.4);">К · 4</div>
+  <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,transparent 100%);padding:16px 20px 18px;">
+    <span style="font-size:9px;letter-spacing:5px;text-transform:uppercase;color:rgba(201,168,76,0.7);display:block;margin-bottom:4px;">Реализация</span>
+    <div style="font-family:var(--serif);font-size:clamp(26px,7vw,36px);font-weight:300;color:var(--warm-white);line-height:1.1;">План <em style="color:var(--gold);font-style:italic;">строительства</em></div>
+  </div>
+</div>
+<div class="tx-dark">
+  <div class="phgrid">
+    <div class="phitem"><div class="phnum">I Очередь</div><div class="phname">Жилой дом №1</div><div class="phdet">Корпуса 1, 2, 3, 4 · Сдача: 1 кв. 2029 г.</div></div>
+    <div class="phitem"><div class="phnum">II Очередь</div><div class="phname">Жилой дом №2</div><div class="phdet">Корпуса 1, 2, 3 · Сроки уточняются</div></div>
+    <div class="phitem"><div class="phnum">Инфраструктура</div><div class="phname">Коммерческая галерея</div><div class="phdet">Первые этажи · Вместе с I очередью</div></div>
+  </div>
+</div>
+
+<!-- ══ 24. АКТИВ ══ -->
+<div class="photo-wrap">
+  <img class="photo-wide" src="assets/m/2c9e5708f715.jpg" alt="" loading="lazy" style="object-position:center 40%;">
+  <div class="ov-bot"></div>
+  <div class="cap">
+    <span class="lbl-dk">Инвестиции</span>
+    <div class="h1">ЗЭТА — актив<br><em class="g">вне времени</em></div>
+  </div>
+</div>
+<div class="tx-dark">
+  <div class="sgrid">
+    <div class="scell"><div class="snum-dk">112</div><div class="slbl-dk">Квартир в коллекции</div></div>
+    <div class="scell"><div class="snum-dk">№1</div><div class="slbl-dk">Бизнес-класс в Кемерово</div></div>
+    <div class="scell full"><div class="snum-dk">∞</div><div class="slbl-dk">Ценность наследия</div></div>
+  </div>
+  <p class="body-dk" style="margin-top:16px;font-style:italic;">Уникальная локация в историческом центре, ограниченное число квартир и архитектура как памятник эпохи.</p>
+</div>
+
+<!-- ══ 25. КОМАНДА ══ -->
+<div style="position:relative;overflow:hidden;background:#0a0908;">
+  <img src="assets/m/ce285e44096a.jpg" alt="" loading="lazy" style="width:100%;display:block;height:55vw;object-fit:cover;object-position:center 35%;opacity:0.35;">
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,9,8,0.3) 0%,rgba(10,9,8,0.85) 70%);"></div>
+  <div style="position:relative;z-index:1;padding:28px 20px 36px;text-align:center;margin-top:-20px;">
+    <img src="assets/51ad9ddb8bf6.svg" alt="КГС" loading="lazy" style="height:72px;width:auto;margin-bottom:16px;filter:brightness(0) invert(1) sepia(1) saturate(2) hue-rotate(5deg);opacity:0.9;">
+    <div style="width:40px;height:1px;background:rgba(201,168,76,0.4);margin:0 auto 14px;"></div>
+    <span style="font-size:9px;letter-spacing:5px;text-transform:uppercase;color:rgba(201,168,76,0.6);display:block;margin-bottom:10px;">Надёжность</span>
+    <div style="font-family:var(--serif);font-size:clamp(32px,9vw,46px);font-weight:300;color:var(--warm-white);line-height:1.05;">Команда<br><em style="color:var(--gold);font-style:italic;">первых</em></div>
+    <div style="width:40px;height:1px;background:rgba(201,168,76,0.4);margin:16px auto;">
+    </div>
+    <p style="font-size:13px;line-height:1.75;color:rgba(212,200,176,0.75);font-weight:300;max-width:290px;margin:0 auto;">КГС — ведущая строительная компания Кузбасса с 68-летней историей. Более 2 миллионов квадратных метров введённого жилья.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px;text-align:left;">
+      <div style="padding:12px;border:1px solid rgba(201,168,76,0.2);">
+        <div style="font-family:var(--serif);font-size:28px;color:var(--gold);">68</div>
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,0.5);">лет на рынке</div>
+      </div>
+      <div style="padding:12px;border:1px solid rgba(201,168,76,0.2);">
+        <div style="font-family:var(--serif);font-size:28px;color:var(--gold);">2M+</div>
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,0.5);">кв.м сдано</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 26. ПРЕИМУЩЕСТВА ══ -->
+<img src="assets/m/647b2b0bf533.jpeg" alt="" loading="lazy" style="width:100%;display:block;height:60vw;object-fit:cover;object-position:center;">
+<div class="tx">
+  <span class="lbl">Почему ЗЭТА</span>
+  <div class="h2" style="margin-bottom:20px;">Основные<br><em class="g">преимущества</em></div>
+  <div class="agrid">
+    <div class="aitem"><div class="atit">Команда</div><div class="adsc">68 лет опыта, репутация лидера региона, тысячи сданных квартир</div></div>
+    <div class="aitem"><div class="atit">Технологии</div><div class="adsc">Умная инженерия, энергоэффективность, системы нового поколения</div></div>
+    <div class="aitem"><div class="atit">Комфорт</div><div class="adsc">Все сервисы и инфраструктура в едином квартале</div></div>
+    <div class="aitem"><div class="atit">Качество</div><div class="adsc">Авторская архитектура, натуральные материалы, потолки 2,7–3,5 м</div></div>
+  </div>
+</div>
+
+<!-- ══ 27. ПРИГЛАШЕНИЕ ══ -->
+<div class="hero" style="background-image:url('assets/m/4e7ebf018805.jpg');background-position:center 30%;">
+  <div class="hero-ov-bot"></div>
+  <div class="hero-ctr">
+    <div style="font-size:10px;font-weight:500;letter-spacing:6px;text-transform:uppercase;color:var(--gold2);margin-bottom:22px;">— Приглашение —</div>
+    <div style="font-family:var(--serif);font-size:clamp(46px,13vw,64px);font-weight:300;color:var(--warm-white);line-height:1.0;margin-bottom:4px;">Откройте</div>
+    <div style="font-family:var(--serif);font-size:clamp(46px,13vw,64px);font-weight:300;font-style:italic;line-height:1.0;margin-bottom:28px;background:linear-gradient(135deg,#e8c96a,#c9a84c,#f0d880,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">центр заново</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;">
+      <div style="width:44px;height:1px;background:linear-gradient(to right,transparent,var(--gold));"></div>
+      <div style="width:4px;height:4px;border:1px solid var(--gold);transform:rotate(45deg);"></div>
+      <div style="width:44px;height:1px;background:linear-gradient(to left,transparent,var(--gold));"></div>
+    </div>
+    <p style="font-family:var(--serif);font-size:15px;font-style:italic;color:rgba(245,240,232,0.8);max-width:260px;line-height:1.6;">Персональная презентация — для тех, кто выбирает только лучшее</p>
+  </div>
+</div>
+
+<!-- ══ 28. КОНТАКТЫ ══ -->
+<img src="assets/abfc1b8bdf3b.jpg" alt="" loading="lazy" style="width:100%;display:block;height:50vw;object-fit:cover;object-position:center 30%;">
+<div class="tx">
+  <span class="lbl">Связаться с нами</span>
+  <div class="h2" style="margin-bottom:24px;">Контакты</div>
+  <div class="cblock">
+    <div class="ctype">Отдел продаж</div>
+    <div class="cval"><a href="tel:73842311046">7 (3842) 311-046</a></div>
+    <div class="cval"><a href="tel:89235244590">8-923-524-45-90</a></div>
+  </div>
+  <div class="cblock">
+    <div class="ctype">Сайт</div>
+    <div class="cval"><a href="http://kgstroy.ru">KGSTROY.RU</a></div>
+    <div class="csub">Полная информация о проекте</div>
+  </div>
+  <div class="cblock" style="margin-bottom:0;">
+    <div class="ctype">Офис продаж</div>
+    <div class="cval">Тухачевского, 36а</div>
+    <div class="csub">Кемерово · Пн–Вс 9:00–20:00</div>
+  </div>
+</div>
+
+<!-- ══ 29. ЗАДНЯЯ ОБЛОЖКА ══ -->
+<div class="hero" style="background-image:url('assets/dd8bc6f57052.jpeg');background-position:center;">
+  <div class="hero-ov-bot"></div>
+  <div class="hero-ctr" style="justify-content:center;">
+    <img src="assets/5c325e2a585c.svg" alt="ЗЭТА" loading="lazy" style="height:150px;width:auto;margin-bottom:24px;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.5));">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+      <div style="width:44px;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,0.6));"></div>
+      <div style="width:4px;height:4px;background:var(--gold);transform:rotate(45deg);"></div>
+      <div style="width:44px;height:1px;background:linear-gradient(to left,transparent,rgba(201,168,76,0.6));"></div>
+    </div>
+    <div style="font-family:var(--serif);font-size:clamp(26px,8vw,38px);font-weight:300;font-style:italic;color:var(--warm-white);margin-bottom:20px;">твой шаг в будущее</div>
+    <div style="font-size:9px;letter-spacing:5px;text-transform:uppercase;color:rgba(212,200,176,0.5);">Кемерово · Жилой квартал · kgstroy.ru</div>
+  </div>
+</div>
+
+</body>
+</html>
